@@ -1,0 +1,59 @@
+"Phrases" 
+{
+	"#L4D360UI_CampaignName_C1"
+	{
+		"ru" "Вымерший центр"
+	}
+	"#L4D360UI_CampaignName_C2"
+	{
+		"ru" "Мрачный карнавал"
+	}
+	"#L4D360UI_CampaignName_C3"
+	{
+		"ru" "Болотная лихорадка"
+	}
+	"#L4D360UI_CampaignName_C4"
+	{
+		"ru" "Ужасный ливень"
+	}
+	"#L4D360UI_CampaignName_C5"
+	{
+		"ru" "Приход"
+	}
+	"#L4D360UI_CampaignName_C6"
+	{
+		"ru" "Переход"
+	}
+	"#L4D360UI_CampaignName_C7"
+	{
+		"ru" "Жертва"
+	}
+	"#L4D360UI_CampaignName_C8"
+	{
+		"ru" "Нет милосердию"
+	}
+	"#L4D360UI_CampaignName_C9"
+	{
+		"ru" "Роковой полёт"
+	}
+	"#L4D360UI_CampaignName_C10"
+	{
+		"ru" "Похоронный звон"
+	}
+	"#L4D360UI_CampaignName_C11"
+	{
+		"ru" "Смерть в воздухе"
+	}
+	"#L4D360UI_CampaignName_C12"
+	{
+		"ru" "Кровавая жатва"
+	}
+	"#L4D360UI_CampaignName_C13"
+	{
+		"ru" "Холодный ручей"
+	}
+	"#L4D360UI_CampaignName_C14"
+	{
+		"ru" "Последний рубеж"
+	}
+}

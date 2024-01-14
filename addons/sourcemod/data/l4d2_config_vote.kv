@@ -1,0 +1,309 @@
+"选择投票类型"
+{
+	"地图投票"
+	{
+		"Type"				"ExternalVote"
+		"Command"			"sm_chmap"
+	}
+
+	"更改难度"
+	{
+		"简单"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"更改难度为 简单?"
+			"Command"				"sm_cvar z_difficulty Easy"
+		}
+		"普通"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"更改难度为 普通?"
+			"Command"				"sm_cvar z_difficulty Normal"
+		}
+		"高级"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"更改难度为 高级?"
+			"Command"				"sm_cvar z_difficulty Hard"
+		}
+		"专家"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"更改难度为 专家?"
+			"Command"				"sm_cvar z_difficulty Impossible"
+		}
+	}
+
+	"更改模式"
+	{
+		"战役模式"
+		{
+			"普通战役"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 普通战役?"
+				"Command"				"sm_cvar mp_gamemode coop;sm_restart"
+			}
+			"普通写实"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 普通写实?"
+				"Command"				"sm_cvar mp_gamemode realism;sm_restart"
+			}
+			"特感速递"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 特感速递?"
+				"Command"				"sm_cvar mp_gamemode community1;sm_restart"
+			}
+			"感染季节"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 感染季节?"
+				"Command"				"sm_cvar mp_gamemode community2;sm_restart"
+			}
+			"死亡之门"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 死亡之门?"
+				"Command"				"sm_cvar mp_gamemode community5;sm_restart"
+			}
+			"枪枪爆头"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 枪枪爆头?"
+				"Command"				"sm_cvar mp_gamemode mutation2;sm_restart"
+			}
+			"血流不止"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 血流不止?"
+				"Command"				"sm_cvar mp_gamemode mutation3;sm_restart"
+			}
+			"绝境求生"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 绝境求生?"
+				"Command"				"sm_cvar mp_gamemode mutation4;sm_restart"
+			}
+			"铁人意志"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 铁人意志?"
+				"Command"				"sm_cvar mp_gamemode mutation8;sm_restart"
+			}
+			"侏儒卫队"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 侏儒卫队?"
+				"Command"				"sm_cvar mp_gamemode mutation9;sm_restart"
+			}
+			"无法近身"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 无法近身?"
+				"Command"				"sm_cvar mp_gamemode mutation14;sm_restart"
+			}
+			"猎人派对"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 猎人派对?"
+				"Command"				"sm_cvar mp_gamemode mutation16;sm_restart"
+			}
+		}
+		"对抗模式"
+		{
+			"普通对抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 普通对抗?"
+				"Command"				"sm_cvar mp_gamemode versus;sm_restart"
+			}
+			"团队对抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 团队对抗?"
+				"Command"				"sm_cvar mp_gamemode teamversus;sm_restart"
+			}
+			"清道夫"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 清道夫?"
+				"Command"				"sm_cvar mp_gamemode scavenge;sm_restart"
+			}
+			"团队清道夫"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 团队清道夫?"
+				"Command"				"sm_cvar mp_gamemode teamscavenge;sm_restart"
+			}
+			"骑师派对"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 骑师派对?"
+				"Command"				"sm_cvar mp_gamemode community3;sm_restart"
+			}
+			"官方药抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 官方药抗?"
+				"Command"				"sm_cvar mp_gamemode community6;sm_restart"
+			}
+			"没有救赎"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 没有救赎?"
+				"Command"				"sm_cvar mp_gamemode mutation11;sm_restart"
+			}
+			"写实对抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 写实对抗?"
+				"Command"				"sm_cvar mp_gamemode mutation12;sm_restart"
+			}
+			"清道肆虐"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 清道肆虐?"
+				"Command"				"sm_cvar mp_gamemode mutation13;sm_restart"
+			}
+			"生存对抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 生存对抗?"
+				"Command"				"sm_cvar mp_gamemode mutation15;sm_restart"
+			}
+			"失血对抗"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 失血对抗?"
+				"Command"				"sm_cvar mp_gamemode mutation18;sm_restart"
+			}
+			"坦克派对"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 坦克派对?"
+				"Command"				"sm_cvar mp_gamemode mutation19;sm_restart"
+			}
+		}
+		"单人模式"
+		{
+			"孤身一人"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 孤身一人?"
+				"Command"				"sm_cvar mp_gamemode mutation1;sm_restart"
+			}
+			"孤胆枪手"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"0"
+				"Description"			"更改模式为 孤胆枪手?"
+				"Command"				"sm_cvar mp_gamemode mutation17;sm_restart"
+			}
+		}
+	}
+
+	"重启当前章节"
+	{
+		"Type"					"ServerCommand"
+		"MenuTeamFlags"			"14"
+		"VoteTeamFlags"			"14"
+		"AdminOneVotePassed"	"0"
+		"AdminOneVoteAgainst"	"0"
+		"Description"			"重启当前章节?"
+		"Command"				"sm_restart"
+	}
+
+	"踢出所有电脑"
+	{
+		"Type"					"ServerCommand"
+		"MenuTeamFlags"			"14"
+		"VoteTeamFlags"			"14"
+		"AdminOneVotePassed"	"0"
+		"AdminOneVoteAgainst"	"0"
+		"Description"			"踢出所有电脑?"
+		"Command"				"sm_kb"
+	}
+
+	"开启或关闭队友伤害"
+	{
+		"Type"					"ServerCommand"
+		"MenuTeamFlags"			"14"
+		"VoteTeamFlags"			"14"
+		"AdminOneVotePassed"	"0"
+		"AdminOneVoteAgainst"	"0"
+		"Description"			"开启或关闭队友伤害?"
+		"Command"				"sm_noff"
+	}
+
+	"开启或关闭更多后备弹药"
+	{
+		"Type"					"ServerCommand"
+		"MenuTeamFlags"			"14"
+		"VoteTeamFlags"			"14"
+		"AdminOneVotePassed"	"0"
+		"AdminOneVoteAgainst"	"0"
+		"Description"			"开启或关闭更多后备弹药?"
+		"Command"				"sm_ammo"
+	}
+}
