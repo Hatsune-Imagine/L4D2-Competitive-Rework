@@ -4,7 +4,7 @@
 #include <sdktools>
 #include <geoip>
 
-#define PLUGIN_VERSION "1.4"
+#define PLUGIN_VERSION "1.4a"
 
 StringMap
 	g_smCommands;
@@ -34,7 +34,7 @@ static const char
 
 public Plugin myinfo = {
 	name = "SaveChat",
-	author = "citkabuto, sorallll",
+	author = "citkabuto, sorallll, HatsuneImagine",
 	description = "Records player chat messages to a file",
 	version = PLUGIN_VERSION,
 	url = "http://forums.alliedmods.net/showthread.php?t=117116"
@@ -44,7 +44,7 @@ public void OnPluginStart() {
 	InitCommands();
 	g_cvHostport = FindConVar("hostport");
 
-	FormatTime(g_sMsg, sizeof g_sMsg, "%d%m%y", -1);
+	FormatTime(g_sMsg, sizeof g_sMsg, "%Y%m%d", -1);
 	BuildPath(Path_SM, g_sLogPath, sizeof g_sLogPath, "/logs/chat%s-%i.log", g_sMsg, g_cvHostport.IntValue);
 
 	HookEvent("round_end",			Event_RoundEnd,			EventHookMode_PostNoCopy);
@@ -100,7 +100,7 @@ public void OnMapEnd() {
 	g_iRoundCount = 0;
 
 	char time[32];
-	FormatTime(time, sizeof time, "%d/%m/%Y %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
 
 	LogTo("+-------------------------------------------+");
 	LogTo("|                  地图结束                  |");
@@ -109,12 +109,12 @@ public void OnMapEnd() {
 }
 
 public void OnMapStart() {
-	FormatTime(g_sMsg, sizeof g_sMsg, "%d%m%y", -1);
+	FormatTime(g_sMsg, sizeof g_sMsg, "%Y%m%d", -1);
 	BuildPath(Path_SM, g_sLogPath, sizeof g_sLogPath, "/logs/chat%s-%i.log", g_sMsg, g_cvHostport.IntValue);
 
 	char time[32];
 	GetCurrentMap(g_sMap, sizeof g_sMap);
-	FormatTime(time, sizeof time, "%d/%m/%Y %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
 
 	LogTo("+-------------------------------------------+");
 	LogTo("|                  地图开始                  |");
@@ -124,7 +124,7 @@ public void OnMapStart() {
 
 void Event_RoundEnd(Event event, const char[] name, bool dontBroadcast) {
 	char time[32];
-	FormatTime(time, sizeof time, "%d/%m/%Y %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
 	LogTo("[%s] 第 %d 回合结束", time, g_iRoundCount);
 }
 
@@ -132,7 +132,7 @@ void Event_RoundStart(Event event, const char[] name, bool dontBroadcast) {
 	g_iRoundCount++;
 
 	char time[32];
-	FormatTime(time, sizeof time, "%d/%m/%Y %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
 	LogTo("[%s] 第 %d 回合开始", time, g_iRoundCount);
 }
 
