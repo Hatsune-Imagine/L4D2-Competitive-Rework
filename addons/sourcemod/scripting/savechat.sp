@@ -4,7 +4,7 @@
 #include <sdktools>
 #include <geoip>
 
-#define PLUGIN_VERSION "1.4a"
+#define PLUGIN_VERSION "1.4b"
 
 StringMap
 	g_smCommands;
@@ -25,10 +25,6 @@ static const char
 		"say",
 		"say_team",
 		"callvote",
-		"unpause",
-		"setpause",
-		"choose_opendoor",
-		"choose_closedoor",
 		"go_away_from_keyboard"
 	};
 
@@ -65,11 +61,9 @@ Action CommandListener(int client, char[] command, int argc) {
 	if (!client || !IsClientInGame(client) || IsFakeClient(client))
 		return Plugin_Continue;
 
-	if (strncmp(command, "sm", 2) != 0) {
-		StringToLowerCase(command);
-		if (!g_smCommands.ContainsKey(command))
-			return Plugin_Continue;
-	}
+	StringToLowerCase(command);
+	if (!g_smCommands.ContainsKey(command))
+		return Plugin_Continue;
 
 	static char time[16];
 	static char team[12];
@@ -78,7 +72,13 @@ Action CommandListener(int client, char[] command, int argc) {
 	GetCmdArgString(g_sMsg, sizeof g_sMsg);
 	StripQuotes(g_sMsg);
 
-	LogTo("[%s] [%s] %N: %s %s", time, team, client, command, g_sMsg);
+	if (StrEqual(command, "say"))
+		LogTo("[%s] [%s] %N: %s", time, team, client, g_sMsg);
+	else if (StrEqual(command, "say_team"))
+		LogTo("[%s] [%s] %N: (TEAM) %s", time, team, client, g_sMsg);
+	else
+		LogTo("[%s] [%s] %N: (%s %s)", time, team, client, command, g_sMsg);
+
 	return Plugin_Continue;
 }
 
@@ -100,7 +100,7 @@ public void OnMapEnd() {
 	g_iRoundCount = 0;
 
 	char time[32];
-	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%H:%M:%S %Y/%m/%d", -1);
 
 	LogTo("+-------------------------------------------+");
 	LogTo("|                  地图结束                  |");
@@ -114,7 +114,7 @@ public void OnMapStart() {
 
 	char time[32];
 	GetCurrentMap(g_sMap, sizeof g_sMap);
-	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%H:%M:%S %Y/%m/%d", -1);
 
 	LogTo("+-------------------------------------------+");
 	LogTo("|                  地图开始                  |");
@@ -124,7 +124,7 @@ public void OnMapStart() {
 
 void Event_RoundEnd(Event event, const char[] name, bool dontBroadcast) {
 	char time[32];
-	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%H:%M:%S %Y/%m/%d", -1);
 	LogTo("[%s] 第 %d 回合结束", time, g_iRoundCount);
 }
 
@@ -132,7 +132,7 @@ void Event_RoundStart(Event event, const char[] name, bool dontBroadcast) {
 	g_iRoundCount++;
 
 	char time[32];
-	FormatTime(time, sizeof time, "%Y/%m/%d %H:%M:%S", -1);
+	FormatTime(time, sizeof time, "%H:%M:%S %Y/%m/%d", -1);
 	LogTo("[%s] 第 %d 回合开始", time, g_iRoundCount);
 }
 
