@@ -2,9 +2,9 @@
 #pragma newdecls required
 
 #define PLUGIN_NAME				"L4D2 Map vote"
-#define PLUGIN_AUTHOR			"fdxx, sorallll"
+#define PLUGIN_AUTHOR			"fdxx, sorallll, HatsuneImagine"
 #define PLUGIN_DESCRIPTION		""
-#define PLUGIN_VERSION			"0.9"
+#define PLUGIN_VERSION			"1.0"
 #define PLUGIN_URL				""
 
 #define TRANSLATION_MISSIONS	"missions.phrases.txt"
@@ -573,7 +573,8 @@ void VoteNextMap(int client, const char[] item) {
 	vote.SetInfo(buffer);
 
 	int team;
-	int clients[1];
+	int playerCount = 0;
+	int[] clients = new int[MaxClients];
 	for (int i = 1; i <= MaxClients; i++) {
 		if (!IsClientInGame(i) || IsFakeClient(i) || (team = GetClientTeam(i)) < 2 || team > 3)
 			continue;
@@ -581,9 +582,9 @@ void VoteNextMap(int client, const char[] item) {
 		fmt_Translate(item, buffer, sizeof buffer, i, item);
 		vote.SetTitle("设置下一张地图为: %s", buffer);
 
-		clients[0] = i;
-		vote.DisplayVote(clients, 1, 20);
+		clients[playerCount++] = i;
 	}
+	vote.DisplayVote(clients, playerCount, 20);
 }
 
 void NextMap_Handler(L4D2NativeVote vote, VoteAction action, int param1, int param2) {
@@ -787,7 +788,8 @@ void VoteChangeMap(int client, const char[] item) {
 	ExplodeString(item, "//", info, sizeof info, sizeof info[]);
 
 	int team;
-	int clients[1];
+	int playerCount = 0;
+	int[] clients = new int[MaxClients];
 	for (int i = 1; i <= MaxClients; i++) {
 		if (!IsClientInGame(i) || IsFakeClient(i) || (team = GetClientTeam(i)) < 2 || team > 3)
 			continue;
@@ -796,9 +798,9 @@ void VoteChangeMap(int client, const char[] item) {
 		fmt_Translate(info[1], info[1], sizeof info[], i, info[1]);
 		vote.SetTitle("更换地图: %s (%s)", info[0], info[1]);
 
-		clients[0] = i;
-		vote.DisplayVote(clients, 1, 20);
+		clients[playerCount++] = i;
 	}
+	vote.DisplayVote(clients, playerCount, 20);
 }
 
 void ChangeMap_Handler(L4D2NativeVote vote, VoteAction action, int param1, int param2) {
