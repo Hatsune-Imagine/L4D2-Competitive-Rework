@@ -8,7 +8,7 @@
 #define PLUGIN_NAME					"SafeArea Teleport"
 #define PLUGIN_AUTHOR				"sorallll, HatsuneImagine"
 #define PLUGIN_DESCRIPTION			""
-#define PLUGIN_VERSION				"1.2.1a"
+#define PLUGIN_VERSION				"1.2.1b"
 #define PLUGIN_URL					"https://forums.alliedmods.net/showthread.php?p=2766514#post2766514"
 
 #define DEBUG						0
@@ -751,7 +751,7 @@ void Perform(int type) {
 
 void CloseAndLockLastSafeDoor() {
 	int entRef = g_LastDoor.entRef;
-	if (EntRefToEntIndex(entRef) != INVALID_ENT_REFERENCE) {
+	if (EntRefToEntIndex(entRef) != INVALID_ENT_REFERENCE && HasEntProp(entRef, Prop_Data, "m_flSpeed") && HasEntProp(entRef, Prop_Data, "m_hasUnlockSequence")) {
 		char buffer[64];
 		SetEntPropFloat(entRef, Prop_Data, "m_flSpeed", 1000.0);
 		SetEntProp(entRef, Prop_Data, "m_hasUnlockSequence", 0);
