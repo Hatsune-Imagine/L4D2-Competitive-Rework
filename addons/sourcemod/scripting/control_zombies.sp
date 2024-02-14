@@ -18,7 +18,7 @@
 #define PLUGIN_NAME				"Control Zombies In Co-op"
 #define PLUGIN_AUTHOR			"sorallll, HatsuneImagine"
 #define PLUGIN_DESCRIPTION		""
-#define PLUGIN_VERSION			"3.6.1a"
+#define PLUGIN_VERSION			"3.6.1b"
 #define PLUGIN_URL				"https://steamcommunity.com/id/sorallll"
 
 #define GAMEDATA 				"control_zombies"
@@ -254,7 +254,7 @@ public void OnPluginStart() {
 	RegConsoleCmd("sm_class",	cmdChangeClass,		"更改特感类型.");
 
 	if (g_bLateLoad)
-		g_bLeftSafeArea = L4D_HasAnySurvivorLeftSafeArea();
+		CreateTimer(15.0, tmrCheckHasAnySurvivorLeftSafeArea);
 
 	PluginStateChanged();
 
@@ -1470,13 +1470,16 @@ void Event_PlayerDeath(Event event, const char[] name, bool dontBroadcast) {
 	}
 }
 
+Action tmrCheckHasAnySurvivorLeftSafeArea(Handle timer) {
+	g_bLeftSafeArea = L4D_HasAnySurvivorLeftSafeArea();
+	return Plugin_Continue;
+}
+
 Action tmrSetSpawnRange(Handle timer) {
-	if (_GetTeamCount(3) > 0) {
+	if (_GetTeamCount(3) > 0)
 		SetConVarInt(FindConVar("z_spawn_safety_range"), 200);
-	}
-	else {
+	else
 		ResetConVar(FindConVar("z_spawn_safety_range"));
-	}
 
 	return Plugin_Continue;
 }
