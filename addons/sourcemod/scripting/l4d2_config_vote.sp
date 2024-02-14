@@ -6,8 +6,7 @@
 #include <l4d2_source_keyvalues>	// https://github.com/fdxx/l4d2_source_keyvalues
 #include <multicolors>
 
-#define VERSION "0.6"
-#define CFG_FILE "data/l4d2_config_vote.kv"
+#define VERSION "0.7"
 #define COMMAND_MAX_LENGTH 511
 
 #define TEAMFLAGS_SPEC	2
@@ -39,7 +38,7 @@ SourceKeyValues
 	g_kvSelect[MAXPLAYERS+1],
 	g_kvRoot;
 
-ConVar g_cvAdminTeamFlags, g_cvPrintMsg;
+ConVar g_cvVoteFilePath, g_cvAdminTeamFlags, g_cvPrintMsg;
 ConfigData g_cfgData[MAXPLAYERS+1];
 
 public Plugin myinfo = 
@@ -58,10 +57,16 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 public void OnPluginStart()
 {
 	CreateConVar("l4d2_config_vote_version", VERSION, "version", FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	g_cvVoteFilePath = CreateConVar("l4d2_config_vote_path", "data/l4d2_config_vote.kv", "Vote config file path");
 	g_cvAdminTeamFlags = CreateConVar("l4d2_config_vote_adminteamflags", "1", "Admin bypass TeamFlags.");
-	g_cvPrintMsg = CreateConVar("l4d2_config_vote_printmsg", "1", "Whether print hint message to clients.");
+	g_cvPrintMsg = CreateConVar("l4d2_config_vote_printmsg", "0", "Whether print hint message to clients.");
+	g_cvVoteFilePath.AddChangeHook(OnCvarChanged);
+	// AutoExecConfig(true, "l4d2_config_vote");
+}
 
-	AutoExecConfig(true, "l4d2_config_vote");
+void OnCvarChanged(ConVar convar, const char[] oldValue, const char[] newValue)
+{
+	Init();
 }
 
 public void OnConfigsExecuted()
@@ -380,7 +385,9 @@ void Init()
 		g_kvRoot.deleteThis();
 
 	char file[PLATFORM_MAX_PATH];
-	BuildPath(Path_SM, file, sizeof(file), CFG_FILE);
+	char g_sVoteFile[128];
+	GetConVarString(g_cvVoteFilePath, g_sVoteFile, sizeof(g_sVoteFile));
+	BuildPath(Path_SM, file, sizeof(file), g_sVoteFile);
 
 	g_kvRoot = SourceKeyValues("");
 	g_kvRoot.UsesEscapeSequences(true);
