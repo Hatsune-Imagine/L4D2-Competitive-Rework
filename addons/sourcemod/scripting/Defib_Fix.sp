@@ -48,6 +48,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	}
 	
 	g_hForward_SurvivorDeathModelCreated = new GlobalForward("L4D2_OnSurvivorDeathModelCreated", ET_Event, Param_Cell, Param_Cell);
+	RegPluginLibrary("Defib_Fix");
 	return APLRes_Success;
 }
 
@@ -224,7 +225,6 @@ public MRESReturn DeathModelCreatePost(int pThis, Handle hReturn)
 public MRESReturn DeathModelCreatePre(int pThis)
 {
 	g_iTempClient = pThis;
-	
 	return MRES_Ignored;
 }
 
