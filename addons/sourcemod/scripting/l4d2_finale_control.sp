@@ -4,7 +4,7 @@
 #include <sdkhooks>
 #include <sdktools>
 
-#define VERSION "1.2"
+#define VERSION "1.3"
 
 char scriptUnlockFinaleBuffer[256], scriptUnblockRescueBuffer[256];
 char scriptUnlockFinale[][] =
@@ -103,156 +103,11 @@ int MenuHandler_Finale(Menu menu, MenuAction action, int client, int param)
 
 void StartFinale(int client)
 {
+	DoMapSpecificConfigs();
 	int ent = FindEntityByClassname(-1, "trigger_finale");
 	if (IsValidEntity(ent))
 	{
-		ReplyToCommand(client, "Force Finale Start...");
-
-		int entity;
-		char targetName[64];
-		char currentMapName[64];
-		GetCurrentMap(currentMapName, sizeof(currentMapName));
-		if (StrEqual(currentMapName, "c2m5_concert"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "logic_relay")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "stadium_entrance_door_relay"))
-					AcceptEntityInput(entity, "Kill");
-			}
-		}
-		else if (StrEqual(currentMapName, "c3m4_plantation"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
-					AcceptEntityInput(entity, "Kill");
-			}
-		}
-		else if (StrEqual(currentMapName, "c4m5_milltown_escape"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
-					AcceptEntityInput(entity, "Kill");
-			}
-		}
-		else if (StrEqual(currentMapName, "c7m3_port"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "point_template")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "door_spawner"))
-				{
-					AcceptEntityInput(entity, "Kill");
-					break;
-				}
-			}
-
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "func_button_timed")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrContains(targetName, "finale_start_button") != -1)
-					AcceptEntityInput(entity, "Unlock");
-			}
-		}
-		else if (StrEqual(currentMapName, "c8m5_rooftop"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "point_template")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "rooftop_playerclip_template"))
-				{
-					AcceptEntityInput(entity, "Kill");
-					break;
-				}
-			}
-
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "func_button")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "radio_button"))
-				{
-					AcceptEntityInput(entity, "Unlock");
-					break;
-				}
-			}
-		}
-		else if (StrEqual(currentMapName, "c9m2_lots"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
-					AcceptEntityInput(entity, "Kill");
-			}
-
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "func_button_timed")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "finaleswitch_initial"))
-				{
-					AcceptEntityInput(entity, "Unlock");
-					break;
-				}
-			}
-		}
-		else if (StrEqual(currentMapName, "c12m5_cornfield"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
-					AcceptEntityInput(entity, "Kill");
-			}
-		}
-		else if (StrEqual(currentMapName, "c14m2_lighthouse"))
-		{
-			entity = INVALID_ENT_REFERENCE;
-			while ((entity = FindEntityByClassname(entity, "func_brush")) != INVALID_ENT_REFERENCE)
-			{
-				GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
-				StringToLowerCase(targetName);
-
-				if (StrEqual(targetName, "lookout_clip"))
-				{
-					AcceptEntityInput(entity, "Kill");
-					break;
-				}
-			}
-		}
+		ReplyToCommand(client, "%t...", "finale_start");
 
 		int entInfoGameEventProxy = FindEntityByClassname(-1, "info_game_event_proxy");
 		if (IsValidEntity(entInfoGameEventProxy))
@@ -261,8 +116,6 @@ void StartFinale(int client)
 		UnlockFinaleNav();
 		AcceptEntityInput(ent, "ForceFinaleStart");
 	}
-	else
-		ReplyToCommand(client, "%T", "finale_only", client);
 }
 
 void TriggerRescue(int client)
@@ -271,7 +124,7 @@ void TriggerRescue(int client)
 	if (IsValidEntity(ent))
 	{
 		StartFinale(client);
-		ReplyToCommand(client, "Force Finale Rescue...");
+		ReplyToCommand(client, "%t...", "finale_rescue");
 
 		int entity;
 		char targetName[64];
@@ -287,8 +140,141 @@ void TriggerRescue(int client)
 		UnblockRescueVehicleNav();
 		AcceptEntityInput(ent, "FinaleEscapeStarted");
 	}
-	else
-		ReplyToCommand(client, "%T", "finale_only", client);
+}
+
+void DoMapSpecificConfigs()
+{
+	int entity;
+	char targetName[64];
+	char currentMapName[64];
+	GetCurrentMap(currentMapName, sizeof(currentMapName));
+	if (StrEqual(currentMapName, "c2m5_concert"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "logic_relay")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "stadium_entrance_door_relay"))
+				AcceptEntityInput(entity, "Kill");
+		}
+	}
+	else if (StrEqual(currentMapName, "c3m4_plantation"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
+				AcceptEntityInput(entity, "Kill");
+		}
+	}
+	else if (StrEqual(currentMapName, "c4m5_milltown_escape"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
+				AcceptEntityInput(entity, "Kill");
+		}
+	}
+	else if (StrEqual(currentMapName, "c7m3_port"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "point_template")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "door_spawner"))
+			{
+				AcceptEntityInput(entity, "Kill");
+				break;
+			}
+		}
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "func_button_timed")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrContains(targetName, "finale_start_button") != -1)
+				AcceptEntityInput(entity, "Unlock");
+		}
+	}
+	else if (StrEqual(currentMapName, "c8m5_rooftop"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "point_template")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "rooftop_playerclip_template"))
+			{
+				AcceptEntityInput(entity, "Kill");
+				break;
+			}
+		}
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "func_button")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "radio_button"))
+			{
+				AcceptEntityInput(entity, "Unlock");
+				break;
+			}
+		}
+	}
+	else if (StrEqual(currentMapName, "c9m2_lots"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
+				AcceptEntityInput(entity, "Kill");
+		}
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "func_button_timed")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "finaleswitch_initial"))
+			{
+				AcceptEntityInput(entity, "Unlock");
+				break;
+			}
+		}
+	}
+	else if (StrEqual(currentMapName, "c12m5_cornfield"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "env_physics_blocker")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "anv_mapfixes_point_of_no_return") || StrEqual(targetName, "community_update_point_of_no_return"))
+				AcceptEntityInput(entity, "Kill");
+		}
+	}
+	else if (StrEqual(currentMapName, "c14m2_lighthouse"))
+	{
+		entity = INVALID_ENT_REFERENCE;
+		while ((entity = FindEntityByClassname(entity, "func_brush")) != INVALID_ENT_REFERENCE)
+		{
+			GetEntPropString(entity, Prop_Data, "m_iName", targetName, sizeof(targetName));
+			StringToLowerCase(targetName);
+			if (StrEqual(targetName, "lookout_clip"))
+			{
+				AcceptEntityInput(entity, "Kill");
+				break;
+			}
+		}
+	}
 }
 
 void UnlockFinaleNav()
