@@ -30,7 +30,7 @@
 	"Skeeted"
 	{
 		"#format"	"{1:N},{2:N},{3:d},{4:s}" // 1:attacker 2:victim 3:shots 4:shots == 1 ? "" : "s"
-		"chi"		"{olive}{1}{default} 空爆了 {olive}{2}{default} ({blue}{3}{default} shot{4})."
+		"chi"		"{olive}{1}{default} 空爆了 {olive}{2}{default} ({blue}{3}{default} 次射击)."
 	}
 	"ShutBoomer"
 	{
