@@ -45,7 +45,7 @@ public Plugin myinfo =
 	name        = "L4D2 Realtime Stats",
 	author      = "Griffin, Philogl, Sir, A1m`",
 	description = "Display Skeets/Etc to Chat to clients",
-	version     = "1.2.2",
+	version     = "1.2.2a",
 	url         = "https://github.com/SirPlease/L4D2-Competitive-Rework"
 
 }
@@ -66,7 +66,7 @@ public void OnPluginStart()
 	HookEvent("player_shoved", Event_PlayerShoved);
 	HookEvent("player_now_it", Event_PlayerBoomed);
 
-	HookEvent("triggered_car_alarm", Event_AlarmCar);
+	// HookEvent("triggered_car_alarm", Event_AlarmCar);
 }
 
 public void Event_PlayerSpawn(Event hEvent, const char[] sEventName, bool bDontBroadcast)
@@ -645,14 +645,14 @@ public void Event_PlayerBoomed(Event hEvent, const char[] sEventName, bool bDont
  * 	"userid"	"short"		// person who triggered the car alarm
  * }
  */
-public void Event_AlarmCar(Event hEvent, const char[] sEventName, bool bDontBroadcast)
-{
-	int iClient = GetClientOfUserId(hEvent.GetInt("userid"));
-	if (iClient > 0 && GetClientTeam(iClient) == TEAM_SURVIVOR)
-	{
-		CPrintToChatAll("%t %t", "Tag+", "AlarmedCar", iClient);
-	}
-}
+// public void Event_AlarmCar(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+// {
+// 	int iClient = GetClientOfUserId(hEvent.GetInt("userid"));
+// 	if (iClient > 0 && GetClientTeam(iClient) == TEAM_SURVIVOR)
+// 	{
+// 		CPrintToChatAll("%t %t", "Tag+", "AlarmedCar", iClient);
+// 	}
+// }
 
 void ClearMapStats()
 {

@@ -61,7 +61,7 @@
 #include <sdktools>
 #include <sourcemod>
 
-#define PLUGIN_VERSION		 "1.1"
+#define PLUGIN_VERSION		 "1.1a"
 
 #define SHOTGUN_BLAST_TIME	 0.1
 #define POUNCE_CHECK_TIME	 0.1

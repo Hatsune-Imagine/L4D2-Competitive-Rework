@@ -441,43 +441,43 @@ stock void HandleCarAlarmTriggered(int survivor, int infected, int reason)
 	if (g_cvarRepCarAlarm.BoolValue && IsValidClientInGame(survivor) && !IsFakeClient(survivor))
 	{
 		if (reason == CALARM_HIT)
-			CPrintToChatAll("%t %t", "Tag+", "CalarmHit", survivor);
+			CPrintToChatAll("%t", "CalarmHit", survivor);
 		else if (reason == CALARM_TOUCHED)
 		{
 			// if a survivor touches an alarmed car, it might be due to a special infected...
 			if (IsValidInfected(infected))
 			{
 				if (!IsFakeClient(infected))
-					CPrintToChatAll("%t %t", "Tag+", "CalarmTouched", infected, survivor);
+					CPrintToChatAll("%t", "CalarmTouched", infected, survivor);
 				else
 				{
 					switch (GetEntProp(infected, Prop_Send, "m_zombieClass"))
 					{
 						case ZC_SMOKER:
-							CPrintToChatAll("%t %t", "Tag+", "CalarmTouchedHunter", survivor);
+							CPrintToChatAll("%t", "CalarmTouchedHunter", survivor);
 						case ZC_JOCKEY:
-							CPrintToChatAll("%t %t", "Tag+", "CalarmTouchedJockey", survivor);
+							CPrintToChatAll("%t", "CalarmTouchedJockey", survivor);
 						case ZC_CHARGER:
-							CPrintToChatAll("%t %t", "Tag+", survivor);
+							CPrintToChatAll("%t", "CalarmTouchedCharger", survivor);
 						default:
-							CPrintToChatAll("%t %t", "Tag+", "CalarmTouchedInfected", survivor);
+							CPrintToChatAll("%t", "CalarmTouchedInfected", survivor);
 					}
 				}
 			}
 			else
-				CPrintToChatAll("%t %t", "Tag+", "CalarmTouchedBot", survivor);
+				CPrintToChatAll("%t", "CalarmTouchedBot", survivor);
 		}
 		else if (reason == CALARM_EXPLOSION)
-			CPrintToChatAll("%t %t", "Tag+", "CalarmExplosion", survivor);
+			CPrintToChatAll("%t", "CalarmExplosion", survivor);
 		else if (reason == CALARM_BOOMER)
 		{
 			if (IsValidInfected(infected) && !IsFakeClient(infected))
-				CPrintToChatAll("%t %t", "Tag+", "CalarmBoomer", survivor, infected);
+				CPrintToChatAll("%t", "CalarmBoomer", survivor, infected);
 			else
-				CPrintToChatAll("%t %t", "Tag+", "CalarmBoomerBot", survivor);
+				CPrintToChatAll("%t", "CalarmBoomerBot", survivor);
 		}
 		else
-			CPrintToChatAll("%t %t", "Tag+", "Calarm", survivor);
+			CPrintToChatAll("%t", "Calarm", survivor);
 	}
 
 	Call_StartForward(g_hForwardAlarmTriggered);

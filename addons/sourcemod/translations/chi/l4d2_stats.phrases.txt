@@ -1,0 +1,44 @@
+"Phrases"
+{
+	"Tag+"
+	{
+		"chi"	"{green}★{default}"
+	}
+	"Tag++"
+	{
+		"chi"	"{green}★★{default}"
+	}
+	"Tag+++"
+	{
+		"chi"	"{green}★★★{default}"
+	}
+	"MeleeSkeeted"
+	{
+		"#format"	"{1:N},{2:N}" // 1:victim 2:attacker
+		"chi"		"{olive}{2}{default} {blue}近战空爆了{default} {olive}{1}{default}."
+	}
+	"Headshotted"
+	{
+		"#format"	"{1:N},{2:N}" // 1:victim 2:attacker
+		"chi"		"{olive}{2}{default} {blue}爆头了{default} {olive}{1}{default}."
+	}
+	"TeamSkeeted"
+	{
+		"#format"	"{1:N},{2:N},{3:d},{4:d},{5:s},{6:s}" // 1:attacker 2:victim 3:damage 4:shots 5:shots == 1 ? "" : "s" 6:assister_string
+		"chi"		"{olive}{1}{default} 团队空爆了 {olive}{2}{default} ({blue}{3}{default} 伤害, {blue}{4}{default} 次射击). 助攻: {olive}{6}{default}"
+	}
+	"Skeeted"
+	{
+		"#format"	"{1:N},{2:N},{3:d},{4:s}" // 1:attacker 2:victim 3:shots 4:shots == 1 ? "" : "s"
+		"chi"		"{olive}{1}{default} 空爆了 {olive}{2}{default} ({blue}{3}{default} shot{4})."
+	}
+	"ShutBoomer"
+	{
+		"#format"	"{1:N},{2:s},{3:.1f}" // 1:g_iBoomerKiller 2:Boomer 3:BoomerKillTime
+		"chi"		"{olive}{1}{default} 在 {blue}{3}{default} 秒内安全地解决了 {olive}{2}{default}(Boomer)."
+	}
+	"AlarmedCar"
+	{
+		"chi"		"{olive}%N{default} 触发了 {olive}警报车{default}."
+	}
+}

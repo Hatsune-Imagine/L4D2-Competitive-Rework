@@ -1,0 +1,44 @@
+"Phrases"
+{
+	"Tag+"
+	{
+		"zho"	"{green}★{default}"
+	}
+	"Tag++"
+	{
+		"zho"	"{green}★★{default}"
+	}
+	"Tag+++"
+	{
+		"zho"	"{green}★★★{default}"
+	}
+	"MeleeSkeeted"
+	{
+		"#format"	"{1:N},{2:N}" // 1:victim 2:attacker
+		"zho"		"{olive}{2}{default} {blue}近戰空爆了{default} {olive}{1}{default}."
+	}
+	"Headshotted"
+	{
+		"#format"	"{1:N},{2:N}" // 1:victim 2:attacker
+		"zho"		"{olive}{2}{default} {blue}爆頭了{default} {olive}{1}{default}."
+	}
+	"TeamSkeeted"
+	{
+		"#format"	"{1:N},{2:N},{3:d},{4:d},{5:s},{6:s}" // 1:attacker 2:victim 3:damage 4:shots 5:shots == 1 ? "" : "s" 6:assister_string
+		"zho"		"{olive}{1}{default} 團隊空爆了 {olive}{2}{default} ({blue}{3}{default} 傷害, {blue}{4}{default} 次射擊). 助攻: {olive}{6}{default}"
+	}
+	"Skeeted"
+	{
+		"#format"	"{1:N},{2:N},{3:d},{4:s}" // 1:attacker 2:victim 3:shots 4:shots == 1 ? "" : "s"
+		"zho"		"{olive}{1}{default} 空爆了 {olive}{2}{default} ({blue}{3}{default} shot{4})."
+	}
+	"ShutBoomer"
+	{
+		"#format"	"{1:N},{2:s},{3:.1f}" // 1:g_iBoomerKiller 2:Boomer 3:BoomerKillTime
+		"zho"		"{olive}{1}{default} 在 {blue}{3}{default} 秒内安全地解決了 {olive}{2}{default}(Boomer)."
+	}
+	"AlarmedCar"
+	{
+		"zho"		"{olive}%N{default} 觸發了 {olive}警報車{default}."
+	}
+}
