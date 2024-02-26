@@ -371,4 +371,30 @@
 			"Command"	"sm_slots 28"
 		}
 	}
+
+	"击杀和显血设置"
+	{
+		"MenuTeamFlags"			"4"
+
+		"开启击杀和特感血量显示"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"开启击杀和特感血量显示?"
+			"Command"				"sm_cvar l4d_broadcast_kill 1;sm_cvar l4d_infectedhp 1"
+		}
+		"关闭击杀和特感血量显示"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"关闭击杀和特感血量显示?"
+			"Command"				"sm_cvar l4d_broadcast_kill 0;sm_cvar l4d_infectedhp 0"
+		}
+	}
 }

@@ -1,0 +1,44 @@
+"Phrases"
+{
+	"Tag"
+	{
+		"zho"		"{blue}[{default}Slots{blue}]{default}"
+	}
+	"NotConsoleVote"
+	{
+		"zho"		"[Slots] 您只能在游戲中發起投票."
+	}
+	"LimitSlotsAbove"
+	{
+		"zho"		"您不能在此服務器上設置最大人數超過 {olive}%i{default}."
+	}
+	"LimitedSlotsTo"
+	{
+		"#format"   "{1:s},{2:i}" // 1:sName 2:Int
+		"zho"		"{olive}{1}{default} 已設置最大人數為 {blue}{2}{default}"
+	}
+	"RequiredPlayers"
+	{
+		"zho"		"您不能設置最大人數少於游戲所需玩家數."
+	}
+	"SlotsUsage"
+	{
+		"zho"		"Usage: {olive}!slots{default} <{olive}number{default}> {blue}|{default} Example: {olive}!slots 8{default}"
+	}
+	"Spectators"
+	{
+		"zho"		"旁觀者不能進行投票."
+	}
+	"LimitSlots"
+	{
+		"zho"		"設置最大人數為 '%s'?"
+	}
+	"CannotBeStarted"
+	{
+		"zho"		"現在不能進行投票."
+	}
+	"LimitingSlots"
+	{
+		"zho"		"正在設置最大人數..."
+	}
+}

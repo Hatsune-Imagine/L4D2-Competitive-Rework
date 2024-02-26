@@ -1,0 +1,44 @@
+"Phrases"
+{
+	"Tag"
+	{
+		"chi"		"{blue}[{default}Slots{blue}]{default}"
+	}
+	"NotConsoleVote"
+	{
+		"chi"		"[Slots] 您只能在游戏中发起投票."
+	}
+	"LimitSlotsAbove"
+	{
+		"chi"		"您不能在此服务器上设置最大人数超过 {olive}%i{default}."
+	}
+	"LimitedSlotsTo"
+	{
+		"#format"   "{1:s},{2:i}" // 1:sName 2:Int
+		"chi"		"{olive}{1}{default} 已设置最大人数为 {blue}{2}{default}"
+	}
+	"RequiredPlayers"
+	{
+		"chi"		"您不能设置最大人数少于游戏所需玩家数."
+	}
+	"SlotsUsage"
+	{
+		"chi"		"Usage: {olive}!slots{default} <{olive}number{default}> {blue}|{default} Example: {olive}!slots 8{default}"
+	}
+	"Spectators"
+	{
+		"chi"		"旁观者不能进行投票."
+	}
+	"LimitSlots"
+	{
+		"chi"		"设置最大人数为 '%s'?"
+	}
+	"CannotBeStarted"
+	{
+		"chi"		"现在不能进行投票."
+	}
+	"LimitingSlots"
+	{
+		"chi"		"正在设置最大人数..."
+	}
+}
