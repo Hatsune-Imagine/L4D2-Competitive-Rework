@@ -17,7 +17,7 @@ public Plugin myinfo =
 	name        = "Slots?! Voter",
 	description = "Slots Voter",
 	author      = "Sir",
-	version     = "",
+	version     = "1.0a",
 	url         = "https://github.com/SirPlease/L4D2-Competitive-Rework/"
 };
 
@@ -34,7 +34,7 @@ public Action SlotsRequest(int client, int args)
 {
 	if (client == 0)
 	{
-		ReplyToCommand(client, "%T", "NotConsoleVote", LANG_SERVER);
+		ReplyToCommand(client, "%t", "NotConsoleVote");
 		return Plugin_Handled;
 	}
 
@@ -49,14 +49,14 @@ public Action SlotsRequest(int client, int args)
 		}
 		else
 		{
-			if (GetUserFlagBits(client) & ADMFLAG_GENERIC)
+			if (GetUserFlagBits(client) >= ADMFLAG_GENERIC)
 			{
 				char sName[MAX_NAME_LENGTH];
 				GetClientName(client, sName, sizeof(sName));
 				CPrintToChatAll("%t %t", "Tag", "LimitedSlotsTo", sName, Int);
 				SetConVarInt(FindConVar("sv_maxplayers"), Int);
 			}
-			else if (Int < GetConVarInt(FindConVar("survivor_limit")) + GetConVarInt(FindConVar("z_max_player_zombies")))
+			else if (Int < 1)
 			{
 				CPrintToChat(client, "%t %t", "Tag", "RequiredPlayers");
 			}
@@ -99,7 +99,7 @@ bool StartSlotVote(int client, char[] Slots)
 		}
 
 		char sBuffer[64];
-		Format(sBuffer, sizeof(sBuffer), "%T", "LimitSlots", LANG_SERVER, Slots);
+		Format(sBuffer, sizeof(sBuffer), "%T", "LimitSlots", client, Slots);
 
 		g_hVote = CreateBuiltinVote(VoteActionHandler, BuiltinVoteType_Custom_YesNo, BuiltinVoteAction_Cancel | BuiltinVoteAction_VoteEnd | BuiltinVoteAction_End);
 		SetBuiltinVoteArgument(g_hVote, sBuffer);
