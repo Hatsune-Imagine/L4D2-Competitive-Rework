@@ -6,7 +6,7 @@
 #include <l4d2_source_keyvalues>	// https://github.com/fdxx/l4d2_source_keyvalues
 #include <multicolors>
 
-#define VERSION "0.7"
+#define VERSION "0.8"
 #define COMMAND_MAX_LENGTH 511
 
 #define TEAMFLAGS_SPEC	2
@@ -121,7 +121,7 @@ void ShowMenu(int client, SourceKeyValues kv, bool bBackButton = true)
 	}
 
 	menu.ExitBackButton = bBackButton;
-	menu.Display(client, 20);
+	menu.Display(client, MENU_TIME_FOREVER);
 }
 
 int MenuHandlerCB(Menu menu, MenuAction action, int client, int itemNum)
