@@ -29,7 +29,6 @@ static ConVar
 	g_hCvarZMobSpawnMaxIntervalNormal = null,
 	g_hCvarMobSpawnMinSize = null,
 	g_hCvarMobSpawnMaxSize = null,
-	g_hCvarSurvivorIncapHealth = null,
 	g_hGT_RemoveEscapeTank = null,
 	g_hGT_BlockPunchRock = null,
 	g_hGT_DisableTankHordes = null; // Disable Tank Hordes items
@@ -47,7 +46,6 @@ void GT_OnModuleStart()
 	g_hGT_DisableTankHordes = CreateConVarEx("disable_tank_hordes", "0", "Disable natural hordes while tanks are in play", _, true, 0.0, true, 1.0);
 	g_hGT_BlockPunchRock = CreateConVarEx("block_punch_rock", "0", "Block tanks from punching and throwing a rock at the same time", _, true, 0.0, true, 1.0);
 
-	g_hCvarSurvivorIncapHealth = FindConVar("survivor_incap_health");
 	g_hCvarTankThrowAllowRange = FindConVar("tank_throw_allow_range");
 	g_hCvarDirectorTankLotterySelectionTime = FindConVar("director_tank_lottery_selection_time");
 	g_hCvarZMobSpawnMinIntervalNormal = FindConVar("z_mob_spawn_min_interval_normal");
@@ -60,7 +58,6 @@ void GT_OnModuleStart()
 	HookEvent("player_death", GT_TankKilled);
 	HookEvent("player_hurt", GT_TankOnFire);
 	HookEvent("item_pickup", GT_ItemPickup);
-	HookEvent("player_incapacitated", GT_PlayerIncap);
 	HookEvent("finale_vehicle_incoming", GT_FinaleVehicleIncoming, EventHookMode_PostNoCopy);
 	HookEvent("finale_vehicle_ready", GT_FinaleVehicleIncoming, EventHookMode_PostNoCopy);
 }
@@ -140,7 +137,7 @@ Action GT_OnTryOfferingTankBot(bool &enterStasis)
 	return Plugin_Continue;
 }
 
-public void GT_FinaleVehicleIncoming(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_FinaleVehicleIncoming(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	g_bGT_FinaleVehicleIncoming = true;
 
@@ -150,7 +147,7 @@ public void GT_FinaleVehicleIncoming(Event hEvent, const char[] sEventName, bool
 	}
 }
 
-public void GT_ItemPickup(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_ItemPickup(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	if (!g_bGT_TankIsInPlay) {
 		return;
@@ -171,13 +168,13 @@ public void GT_ItemPickup(Event hEvent, const char[] sEventName, bool bDontBroad
 	}
 }
 
-public void GT_RoundStart(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_RoundStart(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	g_bGT_FinaleVehicleIncoming = false;
 	GT_Reset();
 }
 
-public void GT_TankKilled(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_TankKilled(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	if (!g_bGT_TankIsInPlay) {
 		return;
@@ -191,7 +188,7 @@ public void GT_TankKilled(Event hEvent, const char[] sEventName, bool bDontBroad
 	g_hGT_TankDeathTimer = CreateTimer(1.0, GT_TankKilled_Timer);
 }
 
-public void GT_TankSpawn(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_TankSpawn(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	int client = GetClientOfUserId(hEvent.GetInt("userid"));
 	g_iGT_TankClient = client;
@@ -222,7 +219,7 @@ public void GT_TankSpawn(Event hEvent, const char[] sEventName, bool bDontBroadc
 	CreateTimer(fFireImmunityTime, GT_FireImmunityTimer);
 }
 
-public void GT_TankOnFire(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+static void GT_TankOnFire(Event hEvent, const char[] sEventName, bool bDontBroadcast)
 {
 	int dmgtype = hEvent.GetInt("type");
 
@@ -245,50 +242,14 @@ public void GT_TankOnFire(Event hEvent, const char[] sEventName, bool bDontBroad
 	SetEntityHealth(client, iSetHealth);
 }
 
-public void GT_PlayerIncap(Event hEvent, const char[] sEventName, bool bDontBroadcast)
-{
-	if (!g_bGT_TankIsInPlay || !IsPluginEnabled() || !g_hGT_Enabled.BoolValue) {
-		return;
-	}
-
-	char weapon[MAX_ENTITY_NAME_LENGTH];
-	hEvent.GetString("weapon", weapon, sizeof(weapon));
-
-	if (strcmp(weapon, "tank_claw") != 0) {
-		return;
-	}
-
-	int userid = hEvent.GetInt("userid");
-	int client = GetClientOfUserId(userid);
-	if (client < 1 || !IsClientInGame(client) || GetClientTeam(client) != L4D2Team_Survivor) {
-		return;
-	}
-
-	SetEntProp(client, Prop_Send, "m_isIncapacitated", 0, 1);
-	SetEntityHealth(client, 1);
-
-	CreateTimer(0.4, GT_IncapTimer, userid, TIMER_FLAG_NO_MAPCHANGE);
-}
-
-public Action GT_IncapTimer(Handle hTimer, int userid)
-{
-	int client = GetClientOfUserId(userid);
-	if (client > 0) {
-		SetEntProp(client, Prop_Send, "m_isIncapacitated", 1, 1);
-		SetEntityHealth(client, g_hCvarSurvivorIncapHealth.IntValue);
-	}
-
-	return Plugin_Stop;
-}
-
-public Action GT_ResumeTankTimer(Handle hTimer)
+static Action GT_ResumeTankTimer(Handle hTimer)
 {
 	GT_ResumeTank();
 
 	return Plugin_Stop;
 }
 
-public Action GT_FireImmunityTimer(Handle hTimer)
+static Action GT_FireImmunityTimer(Handle hTimer)
 {
 	g_bGT_TankHasFireImmunity = false;
 
@@ -332,7 +293,7 @@ static void GT_Reset()
 	g_bGT_TankHasFireImmunity = true;
 }
 
-public Action GT_TankKilled_Timer(Handle hTimer)
+static Action GT_TankKilled_Timer(Handle hTimer)
 {
 	GT_Reset();
 
