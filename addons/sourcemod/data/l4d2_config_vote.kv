@@ -2,8 +2,8 @@
 {
 	"地图投票"
 	{
-		"Type"				"ExternalVote"
-		"Command"			"sm_chmap"
+		"Type"		"ExternalVote"
+		"Command"	"sm_chmap"
 	}
 
 	"更改难度"
@@ -44,9 +44,9 @@
 
 	"更改模式"
 	{
-		"战役模式"
+		"官方及突变模式"
 		{
-			"普通战役"
+			"战役模式"
 			{
 				"Type"					"ServerCommand"
 				"AdminOneVotePassed"	"0"
@@ -54,7 +54,7 @@
 				"Description"			"更改模式为 普通战役?"
 				"Command"				"sm_cvar mp_gamemode coop;sm_restart"
 			}
-			"普通写实"
+			"写实模式"
 			{
 				"Type"					"ServerCommand"
 				"AdminOneVotePassed"	"0"
@@ -142,10 +142,7 @@
 				"Description"			"更改模式为 猎人派对?"
 				"Command"				"sm_cvar mp_gamemode mutation16;sm_restart"
 			}
-		}
-		"对抗模式"
-		{
-			"普通对抗"
+			"对抗模式"
 			{
 				"Type"					"ServerCommand"
 				"AdminOneVotePassed"	"0"
@@ -161,7 +158,7 @@
 				"Description"			"更改模式为 团队对抗?"
 				"Command"				"sm_cvar mp_gamemode teamversus;sm_restart"
 			}
-			"清道夫"
+			"清道夫模式"
 			{
 				"Type"					"ServerCommand"
 				"AdminOneVotePassed"	"0"
@@ -184,14 +181,6 @@
 				"AdminOneVoteAgainst"	"0"
 				"Description"			"更改模式为 骑师派对?"
 				"Command"				"sm_cvar mp_gamemode community3;sm_restart"
-			}
-			"官方药抗"
-			{
-				"Type"					"ServerCommand"
-				"AdminOneVotePassed"	"0"
-				"AdminOneVoteAgainst"	"0"
-				"Description"			"更改模式为 官方药抗?"
-				"Command"				"sm_cvar mp_gamemode community6;sm_restart"
 			}
 			"没有救赎"
 			{
@@ -241,9 +230,6 @@
 				"Description"			"更改模式为 坦克派对?"
 				"Command"				"sm_cvar mp_gamemode mutation19;sm_restart"
 			}
-		}
-		"单人模式"
-		{
 			"孤身一人"
 			{
 				"Type"					"ServerCommand"
@@ -260,6 +246,11 @@
 				"Description"			"更改模式为 孤胆枪手?"
 				"Command"				"sm_cvar mp_gamemode mutation17;sm_restart"
 			}
+		}
+		"match模式"
+		{
+			"Type"		"ExternalVote"
+			"Command"	"sm_match"
 		}
 	}
 
@@ -372,6 +363,32 @@
 		}
 	}
 
+	"黑枪提示设置"
+	{
+		"MenuTeamFlags"			"4"
+
+		"开启黑枪提示"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"开启黑枪提示?"
+			"Command"				"sm_cvar l4d_broadcast_ff 3;sm_cvar l4d_broadcast_hit 1"
+		}
+		"关闭黑枪提示"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"关闭黑枪提示?"
+			"Command"				"sm_cvar l4d_broadcast_ff 0;sm_cvar l4d_broadcast_hit 0"
+		}
+	}
+
 	"击杀显血设置"
 	{
 		"MenuTeamFlags"			"4"
@@ -395,6 +412,32 @@
 			"AdminOneVoteAgainst"	"0"
 			"Description"			"关闭击杀和特感血量显示?"
 			"Command"				"sm_cvar l4d_broadcast_kill 0;sm_cvar l4d_infectedhp 0"
+		}
+	}
+
+	"杀特回血设置"
+	{
+		"MenuTeamFlags"			"4"
+
+		"开启击杀特感回复血量"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"开启击杀特感回复血量?"
+			"Command"				"exec kill_si_restore_health_on.cfg"
+		}
+		"关闭击杀特感回复血量"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"4"
+			"VoteTeamFlags"			"4"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"0"
+			"Description"			"关闭击杀特感回复血量?"
+			"Command"				"exec kill_si_restore_health_off.cfg"
 		}
 	}
 }
