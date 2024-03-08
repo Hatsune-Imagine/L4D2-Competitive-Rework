@@ -37,10 +37,10 @@ public void OnPluginStart()
 	g_cvRestoreHealth[JOCKEY] = CreateConVar("l4d2_kill_jockey_restore_health", "0", "杀死jockey加多少血", FCVAR_NONE);
 	g_cvRestoreHealth[CHARGER] = CreateConVar("l4d2_kill_charger_restore_health", "0", "杀死charger加多少血", FCVAR_NONE);
 
-	g_cvRestoreHealth[WITCH] = CreateConVar("l4d2_kill_witch_restore_health", "10", "杀死witch加多少血", FCVAR_NONE);
+	g_cvRestoreHealth[WITCH] = CreateConVar("l4d2_kill_witch_restore_health", "0", "杀死witch加多少血", FCVAR_NONE);
 	g_cvRestoreHealth[TANK] = CreateConVar("l4d2_kill_tank_restore_health", "0", "杀死tank加多少血", FCVAR_NONE);
 
-	g_cvMaxHealthLimit = CreateConVar("l4d2_kill_si_restore_health_Limit", "110", "达到多少血量后不再加血", FCVAR_NONE);
+	g_cvMaxHealthLimit = CreateConVar("l4d2_kill_si_restore_health_Limit", "100", "达到多少血量后不再加血", FCVAR_NONE);
 	
 	GetCvars();
 
