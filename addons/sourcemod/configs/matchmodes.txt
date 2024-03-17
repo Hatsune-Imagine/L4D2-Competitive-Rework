@@ -1,5 +1,12 @@
 "MatchModes"
 {
+	"多特配置"
+	{
+		"morespecials"
+		{
+			"name" "多特模式"
+		}
+	}
 	"ZoneMod Configs"
 	{
 		"zonemod"
