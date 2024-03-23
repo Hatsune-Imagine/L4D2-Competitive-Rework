@@ -1,156 +1,81 @@
 #pragma semicolon 1
+#pragma newdecls required
+#include <basecomm>
+#include <sdktools_voice>
 
-#include <sourcemod>
-#include <sdktools>
-#include <clientprefs>
-
-native bool IsClientSpeaking(int client);
-
-public Extension:__ext_voice = 
-{
-	name = "VoiceHook",
-	file = "voicehook.ext",
-	autoload = 1,
-	required = 1,
+public Plugin myinfo = {
+	name = "[ANY] Speaking List",
+	author = "Accelerator (Fork by Dragokas, Grey83)",
+	description = "Voice Announce. Print To Center Message who's Speaking",
+	version = "1.4.4",
+	url = "https://forums.alliedmods.net/showthread.php?t=339934"
 }
 
-Handle g_hSpeakingList = INVALID_HANDLE;
-
-int ClientSpeakingList[MAXPLAYERS+1] = {-1, ...};
-
-ConVar va_default_speaklist;
-ConVar va_teamfilter_speaklist;
-
-int iCount;
-int iCountTeam[3];
-char SpeakingPlayers[3][128];
-int team;
-Handle g_hTimerSpeaking;
-
-public Plugin myinfo = 
-{
-	name = "SpeakingList",
-	author = "Accelerator",
-	description = "Voice Announce. Print To Center Message who Speaking. With cookies",
-	version = "1.5",
-	url = "http://core-ss.org"
-}
-
-public void OnPluginStart()
-{
-	g_hSpeakingList = RegClientCookie("speaking-list", "SpeakList", CookieAccess_Protected);
+/*
+	ChangeLog:
 	
-	va_default_speaklist = CreateConVar("va_default_speaklist", "1", "Default setting for Speak List [1-Enable/0-Disable]", 0, true, 0.0, true, 1.0);
-	va_teamfilter_speaklist = CreateConVar("va_teamfilter_speaklist", "0", "Use Team Filter for Speak List [1-Enable/0-Disable]", 0, true, 0.0, true, 1.0);
-	
-	RegConsoleCmd("sm_speaklist", Command_SpeakList);
+	 * 1.4.1 (26-Jan-2020) (Dragokas)
+	  - Client in game check fixed
+	  - Code is simplified
+	  - New syntax
+	  
+	 * 1.4.2 (23-Dec-2020) (Dragokas)
+	  - Updated to use with SM 1.11
+	  - Timer is increased 0.7 => 1.0
+	  
+	 * 1.4.4 (10-Oct-2022) (Grey83)
+	  - Optimization: timer moved from OnPluginStart to OnMapStart.
+	  - Optimization: max. buffer checks and caching.
+*/
 
-	IsShowVoiceList();
+bool
+	g_bSpeaking[MAXPLAYERS + 1];
+
+char
+	g_sSpeaking[PLATFORM_MAX_PATH];
+
+public void OnMapStart() {
+    for (int i = 1; i <= MaxClients; i++)
+		g_bSpeaking[i] = false;
+
+    CreateTimer(1.0, tmrUpdateList, _, TIMER_REPEAT|TIMER_FLAG_NO_MAPCHANGE);
 }
 
-public void OnMapStart()
-{
-	IsShowVoiceList();
-}
-void IsShowVoiceList()
-{
-	delete g_hTimerSpeaking;
-	g_hTimerSpeaking = CreateTimer(0.7, UpdateSpeaking, _, TIMER_REPEAT);
+public void OnClientSpeaking(int client) {
+	g_bSpeaking[client] = true;
 }
 
-public void OnClientPostAdminCheck(int client)
-{
-	if (!IsFakeClient(client))
-	{
-		if (AreClientCookiesCached(client))
-		{
-			char cookie[2];
-			GetClientCookie(client, g_hSpeakingList, cookie, sizeof(cookie));
-			ClientSpeakingList[client] = StringToInt(cookie);
-			
-			if (ClientSpeakingList[client] == 0)
-				ClientSpeakingList[client] = GetConVarInt(va_default_speaklist);
-		}
+/*
+public void OnClientSpeakingEnd(int client) {
+	g_bSpeaking[client] = false;
+}
+*/
+
+Action tmrUpdateList(Handle timer) {
+	static int i;
+	static bool show;
+	g_sSpeaking[0] = '\0';
+	show = false;
+
+	for (i = 1; i <= MaxClients; i++) {
+		if (!g_bSpeaking[i])
+			continue;
+
+		g_bSpeaking[i] = false;
+		if (!IsClientInGame(i))
+			continue;
+
+		if (BaseComm_IsClientMuted(i))
+			continue;
+
+		if (Format(g_sSpeaking, sizeof g_sSpeaking, "%s\n%N", g_sSpeaking, i) >= (sizeof g_sSpeaking - 1))
+			break;
+
+		show = true;
 	}
-}
 
-public void OnClientDisconnect(int client)
-{
-	ClientSpeakingList[client] = -1;
-}
+	if (show)
+		PrintCenterTextAll("语音中:%s", g_sSpeaking);
 
-public Action Command_SpeakList(int client, int args)
-{
-	if (!client || !IsClientInGame(client))
-		return Plugin_Continue;
-	
-	if (ClientSpeakingList[client] == 1)
-	{
-		ClientSpeakingList[client] = -1;
-		if (AreClientCookiesCached(client))
-		{
-			SetClientCookie(client, g_hSpeakingList, "-1");
-		}
-		PrintToChat(client, "[SM] Speaking List is disable for you");
-	}
-	else
-	{
-		ClientSpeakingList[client] = 1;
-		if (AreClientCookiesCached(client))
-		{
-			SetClientCookie(client, g_hSpeakingList, "1");
-		}
-		PrintToChat(client, "[SM] Speaking List is enable for you");
-	}
-	return Plugin_Continue;
-}
-
-public Action UpdateSpeaking(Handle timer)
-{
-	iCount = 0;
-	iCountTeam[0] = 0;
-	iCountTeam[1] = 0;
-	iCountTeam[2] = 0;
-	SpeakingPlayers[0][0] = '\0';
-	SpeakingPlayers[1][0] = '\0';
-	SpeakingPlayers[2][0] = '\0';
-	for (int i = 1; i <= MaxClients; i++)
-	{
-		if (IsClientInGame(i) && !IsFakeClient(i))
-		{
-			if (IsClientSpeaking(i))
-			{
-				if (GetClientListeningFlags(i) & VOICE_MUTED) continue;
-				
-				team = GetClientTeam(i)-1;
-				if (team < 0 || team > 2) continue;
-				
-				Format(SpeakingPlayers[team], sizeof(SpeakingPlayers[]), "%s\n%N", SpeakingPlayers[team], i);
-				iCount++;
-				iCountTeam[team]++;
-			}
-		}
-	}
-	if (iCount > 0)
-	{
-		for (int i = 1; i <= MaxClients; i++)
-		{
-			if (ClientSpeakingList[i] > 0)
-			{
-				if (GetConVarInt(va_teamfilter_speaklist))
-				{
-					team = GetClientTeam(i)-1;
-					if (team < 0 || team > 2) continue;
-					
-					if (iCountTeam[team] > 0)
-					{
-						PrintCenterText(i, "正在语音:%s", SpeakingPlayers[team]);
-					}
-				}
-				else
-					PrintCenterText(i, "正在语音:%s%s%s", SpeakingPlayers[0], SpeakingPlayers[1], SpeakingPlayers[2]);
-			}
-		}
-	}
 	return Plugin_Continue;
 }
