@@ -237,7 +237,7 @@ void Vote_Handler(L4D2NativeVote vote, VoteAction action, int param1, int param2
 		}
 		case VoteAction_End:
 		{
-			if (vote.YesCount > vote.PlayerCount/2)
+			if (vote.YesCount > vote.NoCount)
 			{
 				vote.SetPass("加载中...");
 
