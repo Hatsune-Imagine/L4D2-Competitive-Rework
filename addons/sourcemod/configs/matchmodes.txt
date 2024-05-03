@@ -7,6 +7,13 @@
 			"name" "多特模式"
 		}
 	}
+	"药役配置"
+	{
+		"pillscoop"
+		{
+			"name" "药役模式"
+		}
+	}
 	"ZoneMod Configs"
 	{
 		"zonemod"

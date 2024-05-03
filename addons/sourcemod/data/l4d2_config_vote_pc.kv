@@ -721,4 +721,40 @@
 			"Command"				"sm_cvar l4d2_si_spawn_control_spawn_time 30.0"
 		}
 	}
+
+	"特感增强设置"
+	{
+		"开启特感连跳"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"1"
+			"Description"			"开启特感连跳?"
+			"Command"				"sm_cvar ai_boomer_bhop 1;sm_cvar ai_spitter_bhop 1;sm_cvar ai_charger_bhop 1"
+		}
+		"开启Tank连跳"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"1"
+			"Description"			"开启Tank连跳?"
+			"Command"				"sm_cvar ai_tank_bhop 1"
+		}
+		"关闭特感连跳"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"1"
+			"Description"			"关闭特感连跳?"
+			"Command"				"sm_cvar ai_boomer_bhop 0;sm_cvar ai_spitter_bhop 0;sm_cvar ai_charger_bhop 0"
+		}
+		"关闭Tank连跳"
+		{
+			"Type"					"ServerCommand"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"1"
+			"Description"			"关闭Tank连跳?"
+			"Command"				"sm_cvar ai_tank_bhop 0"
+		}
+	}
 }
