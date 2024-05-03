@@ -3,6 +3,7 @@
 
 #include <sourcemod>
 #include <sdktools>
+#include <left4dhooks>
 #include <l4d2util_constants>
 #undef REQUIRE_PLUGIN
 #include <readyup>
@@ -50,8 +51,6 @@ public void OnPluginStart()
 		_, false, 0.0, true, 127.0 \
 	);
 
-	HookEvent("player_left_start_area", PlayerLeftStartArea, EventHookMode_PostNoCopy);
-
 #if DEBUG
 	RegAdminCmd("sm_give_starting_items", Cmd_GiveStartingItems, ADMFLAG_KICK);
 #endif
@@ -81,11 +80,13 @@ public void OnRoundIsLive()
 	DetermineItems();
 }
 
-public void PlayerLeftStartArea(Event hEvent, const char[] sEventName, bool bDontBroadcast)
+public Action L4D_OnFirstSurvivorLeftSafeArea(int client)
 {
 	if (!g_bReadyUpAvailable) {
 		DetermineItems();
 	}
+
+	return Plugin_Continue;
 }
 
 void DetermineItems()
