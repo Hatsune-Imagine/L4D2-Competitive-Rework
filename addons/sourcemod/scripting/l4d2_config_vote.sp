@@ -38,7 +38,7 @@ SourceKeyValues
 	g_kvSelect[MAXPLAYERS+1],
 	g_kvRoot;
 
-ConVar g_cvVoteFilePath, g_cvAdminTeamFlags, g_cvPrintMsg;
+ConVar g_cvVoteFilePath, g_cvAdminTeamFlags, g_cvPrintMsg, g_cvPassMode;
 ConfigData g_cfgData[MAXPLAYERS+1];
 
 public Plugin myinfo = 
@@ -60,6 +60,7 @@ public void OnPluginStart()
 	g_cvVoteFilePath = CreateConVar("l4d2_config_vote_path", "data/l4d2_config_vote.kv", "Vote config file path.");
 	g_cvAdminTeamFlags = CreateConVar("l4d2_config_vote_adminteamflags", "1", "Admin bypass TeamFlags.");
 	g_cvPrintMsg = CreateConVar("l4d2_config_vote_printmsg", "0", "Whether print hint message to clients.");
+	g_cvPassMode = CreateConVar("l4d2_config_vote_passmode", "0", "Method of judging vote pass. 0=Vote Yes count > Vote No count. 1=Vote Yes count > Half of players count.");
 	g_cvVoteFilePath.AddChangeHook(OnCvarChanged);
 	// AutoExecConfig(true, "l4d2_config_vote");
 }
@@ -237,7 +238,8 @@ void Vote_Handler(L4D2NativeVote vote, VoteAction action, int param1, int param2
 		}
 		case VoteAction_End:
 		{
-			if (vote.YesCount > vote.NoCount)
+			bool voteResult = (g_cvPassMode.BoolValue) ? (vote.YesCount > vote.PlayerCount / 2) : (vote.YesCount > vote.NoCount);
+			if (voteResult)
 			{
 				vote.SetPass("加载中...");
 
