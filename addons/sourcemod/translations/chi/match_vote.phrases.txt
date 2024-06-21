@@ -1,0 +1,83 @@
+"Phrases"
+{
+    "Tag"
+    {
+        "chi"    "[{olive}!{default}]"
+    }
+    "Disabled"
+    {
+        "chi"    "插件 {red}已禁用{default}"
+    }
+    "NoConsole"
+    {
+        "chi"    "此指令不能在控制台使用."
+    }
+    "ConfoglNotAvailable"
+    {
+        "chi"    "Confogl {red}不可用{default}."
+    }
+    "CedaGame"
+    {
+        "chi"    "此指令不允许在 {red}cedapug模式{default} 使用"
+    }
+    "Title_Match"
+    {
+        "chi"    "选择 match 模式:"
+    }
+    "Title_Config"
+    {
+        "chi"    "选择类型 %s:"
+    }
+    "ConfigNotFound"
+    {
+        "chi"    "未找到此模式的配置."
+    }
+    "NoSpec"
+    {
+        "chi"    "旁观者不能发起投票."
+    }
+    "MatchLoaded"
+    {
+        "chi"    "Match模式已加载!"
+    }
+    "NotEnoughPlayers"
+    {
+        "chi"    "不能发起投票. {red}没有足够的玩家{default} ({red}%d{default}/{green}%d{default})."
+    }
+    "Title_LoadConfig"
+    {
+        "chi"    "加载 '%s' 模式配置?"
+    }
+    "VoteInProgress"
+    {
+        "chi"    "{red}投票进行中{default}, 请等待 {green}%d{default} 秒后才能再次发起."
+    }
+    "VotePass_Loading"
+    {
+        "chi"    "Match模式加载中..."
+    }
+    "MatchNotLoaded"
+    {
+        "chi"    "当前{red}没有已加载的{default}模式."
+    }
+    "PlayersConnecting"
+    {
+        "chi"    "不能发起投票. 有玩家正在连接."
+    }
+    "Title_OffConfogl"
+    {
+        "chi"    "卸载当前 match 模式?"
+    }
+    "VotePass_Unloading"
+    {
+        "chi"    "模式卸载中..."
+    }
+    "Title_ChangeConfogl"
+    {
+        "chi"    "更改模式配置为 '%s'?"
+    }
+    "VotePass_Changed"
+    {
+        "chi"    "Match模式已修改..."
+    }
+}

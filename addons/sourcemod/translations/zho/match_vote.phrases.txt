@@ -1,0 +1,83 @@
+"Phrases"
+{
+    "Tag"
+    {
+        "zho"    "[{olive}!{default}]"
+    }
+    "Disabled"
+    {
+        "zho"    "插件 {red}已禁用{default}"
+    }
+    "NoConsole"
+    {
+        "zho"    "此指令不能在控制臺使用."
+    }
+    "ConfoglNotAvailable"
+    {
+        "zho"    "Confogl {red}不可用{default}."
+    }
+    "CedaGame"
+    {
+        "zho"    "此指令不允許在 {red}cedapug模式{default} 使用"
+    }
+    "Title_Match"
+    {
+        "zho"    "選擇 match 模式:"
+    }
+    "Title_Config"
+    {
+        "zho"    "選擇類型 %s:"
+    }
+    "ConfigNotFound"
+    {
+        "zho"    "未找到此模式的配置."
+    }
+    "NoSpec"
+    {
+        "zho"    "旁觀者不能發起投票."
+    }
+    "MatchLoaded"
+    {
+        "zho"    "Match模式已加載!"
+    }
+    "NotEnoughPlayers"
+    {
+        "zho"    "不能發起投票. {red}沒有足夠的玩家{default} ({red}%d{default}/{green}%d{default})."
+    }
+    "Title_LoadConfig"
+    {
+        "zho"    "加載 '%s' 模式配置?"
+    }
+    "VoteInProgress"
+    {
+        "zho"    "{red}投票進行中{default}, 請等待 {green}%d{default} 秒后才能再次發起."
+    }
+    "VotePass_Loading"
+    {
+        "zho"    "Match模式加載中..."
+    }
+    "MatchNotLoaded"
+    {
+        "zho"    "當前{red}沒有已加載的{default}模式."
+    }
+    "PlayersConnecting"
+    {
+        "zho"    "投票不能被發起. 有玩家正在連接."
+    }
+    "Title_OffConfogl"
+    {
+        "zho"    "卸載當前 match 模式?"
+    }
+    "VotePass_Unloading"
+    {
+        "zho"    "模式卸載中..."
+    }
+    "Title_ChangeConfogl"
+    {
+        "zho"    "更換模式配置為 '%s'?"
+    }
+    "VotePass_Changed"
+    {
+        "zho"    "Match模式已修改..."
+    }
+}
