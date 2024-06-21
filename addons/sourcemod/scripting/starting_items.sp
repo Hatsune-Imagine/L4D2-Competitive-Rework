@@ -171,7 +171,7 @@ void GivePlayerWeaponByName(int iClient, const char[] sWeaponName)
 }
 
 #if DEBUG
-public Action Cmd_GiveStartingItems(int iClient, int iArgs)
+Action Cmd_GiveStartingItems(int iClient, int iArgs)
 {
 	DetermineItems();
 	PrintToChat(iClient, "DetermineItems()");
