@@ -144,7 +144,6 @@ new                 iTotalFF;
 
 new                 iRoundNumber;
 new                 bInRound;
-new                 bPlayerLeftStartArea;                       // used for tracking FF when RUP enabled
 
 stock char sTmpString[MAX_NAME_LENGTH];                // just used because I'm not going to break my head over why string assignment parameter passing doesn't work
 
@@ -235,7 +234,6 @@ public OnPluginStart()
     HookEvent("round_end", RoundEnd_Event, EventHookMode_PostNoCopy);
     HookEvent("map_transition", RoundEnd_Event, EventHookMode_PostNoCopy);
     HookEvent("scavenge_round_start", ScavRoundStart, EventHookMode_PostNoCopy);
-    HookEvent("player_left_start_area", PlayerLeftStartArea, EventHookMode_PostNoCopy);
     HookEvent("pills_used", pillsUsedEvent);
     HookEvent("boomer_exploded", boomerExploded);
     HookEvent("charger_carry_end", chargerCarryEnd);
@@ -274,8 +272,6 @@ public OnPluginStart()
     HookConVarChange(hBrevityFlags, ConVarChange_BrevityFlags);
     
     if (!(iBrevityFlags & BREV_FF)) { bTrackFF = true; } // force tracking on if we're showing FF
-    
-    bPlayerLeftStartArea = false;
     
     // Commands
     RegConsoleCmd("sm_mvp", SurvivorMVP_Cmd, "Prints the current MVP for the survivor team");
@@ -356,17 +352,6 @@ void ConVarChange_BrevityFlags(Handle:cvar, const String:oldValue[], const Strin
 *      ==========================
 */
 
-void PlayerLeftStartArea(Handle:event, const String:name[], bool:dontBroadcast)
-{
-    // if RUP active, now we can start tracking FF
-    bPlayerLeftStartArea = true;
-}
-
-public OnMapStart()
-{
-    bPlayerLeftStartArea = false;
-}
-
 public OnMapEnd()
 {
     iRoundNumber = 0;
@@ -418,7 +403,6 @@ void ScavRoundStart(Handle:event, const String:name[], bool:dontBroadcast)
 
 void RoundStart_Event(Handle:event, const String:name[], bool:dontBroadcast)
 {
-    bPlayerLeftStartArea = false;
     bRUPLive = false;
     
     if (!bInRound)
@@ -899,7 +883,7 @@ void PlayerHurt_Event(Handle:event, const String:name[], bool:dontBroadcast)
         // Otherwise if friendly fire
         else if (GetClientTeam(attacker) == TEAM_SURVIVOR && GetClientTeam(victim) == TEAM_SURVIVOR && bTrackFF && !L4D_IsPlayerIncapacitated(victim))                // survivor on survivor action == FF
         {
-            if (bRUPLive || bPlayerLeftStartArea) {
+            if (bRUPLive || L4D_HasAnySurvivorLeftSafeArea()) {
                 // but don't record before readyup ended or before leaving saferoom if readyup is not loaded.
                 iDidFF[attacker] += damageDone;
                 iTotalFF += damageDone;
@@ -1001,7 +985,7 @@ void InfectedDeath_Event(Handle:event, const String:name[], bool:dontBroadcast)
     new attackerId = GetEventInt(event, "attacker");
     new attacker = GetClientOfUserId(attackerId);
     
-    if (bPlayerLeftStartArea && attackerId && IsClientAndInGame(attacker) && GetClientTeam(attacker) == TEAM_SURVIVOR)
+    if (L4D_HasAnySurvivorLeftSafeArea() && attackerId && IsClientAndInGame(attacker) && GetClientTeam(attacker) == TEAM_SURVIVOR)
     {
         // If the tank is up, let's store separately
         if (tankSpawned) {

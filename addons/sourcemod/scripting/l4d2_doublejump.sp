@@ -160,6 +160,7 @@ public Action OnPlayerRunCmd(int client, int &buttons, int &impulse, float vel[3
 			g_fLastButtons[client] = buttons;
 		}
 	}
+	return Plugin_Continue;
 }
 
 void Landed(int client)
