@@ -8,8 +8,9 @@
 #define PLUGIN_NAME "[L4D1/2] Weapon Drop"
 #define PLUGIN_AUTHOR "Machine, dcx2, Electr000999 /z, Senip, Shao, NoroHime, HarryPotter"
 #define PLUGIN_DESC "Allows players to drop the weapon they are holding"
-#define PLUGIN_VERSION "1.12-2024/1/7"
+#define PLUGIN_VERSION "1.12a-2024/8/31"
 #define PLUGIN_URL "https://steamcommunity.com/profiles/76561198026784913/"
+#define IMPULSE_SPRAY 201
 
 public Plugin myinfo =
 {
@@ -57,6 +58,7 @@ char g_sCvarDropSoundFile[PLATFORM_MAX_PATH];
 bool g_bValidMap;
 
 int g_iOffsetAmmo, g_iPrimaryAmmoType;
+float g_fPressTime[MAXPLAYERS + 1];
 
 public void OnPluginStart()
 {
@@ -70,11 +72,11 @@ public void OnPluginStart()
 	if (g_bL4D2Version)
 	{
 		BlockM60Drop = CreateConVar("sm_drop_block_m60", "0", "Prevent players from dropping the M60? (Allows for better compatibility with certain plugins.)", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-		g_hCvarDropSoundFile  = 	    CreateConVar(  "sm_drop_soundfile", 	"ui/gift_pickup.wav", 			"Drop - sound file (relative to to sound/, empty=disable)", FCVAR_NOTIFY);
+		g_hCvarDropSoundFile = CreateConVar(  "sm_drop_soundfile", 	"ui/gift_pickup.wav", 			"Drop - sound file (relative to to sound/, empty=disable)", FCVAR_NOTIFY);
 	}
 	else
 	{
-		g_hCvarDropSoundFile  = 	    CreateConVar(  "sm_drop_soundfile", 	"items/itempickup.wav", 		"Drop - sound file (relative to to sound/, empty=disable)", FCVAR_NOTIFY);
+		g_hCvarDropSoundFile = CreateConVar(  "sm_drop_soundfile", 	"items/itempickup.wav", 		"Drop - sound file (relative to to sound/, empty=disable)", FCVAR_NOTIFY);
 	}
 	CreateConVar("sm_drop_version", PLUGIN_VERSION, "Weapon Drop version.", FCVAR_NOTIFY|FCVAR_REPLICATED|FCVAR_DONTRECORD);
 
@@ -117,17 +119,29 @@ void GetCvars()
 
 public void OnMapStart()
 {
-    g_bValidMap = true;
+	g_bValidMap = true;
 }
 
 public void OnMapEnd()
 {
-    g_bValidMap = false;
+	g_bValidMap = false;
 }
 
 public void OnConfigsExecuted()
 {
-    GetCvars();
+	GetCvars();
+}
+
+public void OnPlayerRunCmdPre(int client, int buttons, int impulse, const float vel[3], const float angles[3], int weapon, int subtype, int cmdnum, int tickcount, int seed, const int mouse[2])
+{
+	if (impulse == IMPULSE_SPRAY && GetClientTeam(client) == 2)
+	{
+		float time = GetEngineTime();
+		if(time - g_fPressTime[client] < 0.3)
+			DropActiveWeapon(client);
+
+		g_fPressTime[client] = time; 
+	}
 }
 
 Action Command_Drop(int client, int args)
