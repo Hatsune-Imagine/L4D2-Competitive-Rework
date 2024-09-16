@@ -260,38 +260,67 @@
 		"Command"				"sm_restart"
 	}
 
-	"踢出所有电脑"
+	"人机玩家设置"
 	{
-		"Type"					"ServerCommand"
-		"MenuTeamFlags"			"14"
-		"VoteTeamFlags"			"14"
-		"AdminOneVotePassed"	"0"
-		"AdminOneVoteAgainst"	"1"
-		"Description"			"踢出所有电脑?"
-		"Command"				"sm_kb"
+		"踢出所有电脑"
+		{
+			"Type"					"ServerCommand"
+			"MenuTeamFlags"			"14"
+			"VoteTeamFlags"			"14"
+			"AdminOneVotePassed"	"0"
+			"AdminOneVoteAgainst"	"1"
+			"Description"			"踢出所有电脑?"
+			"Command"				"sm_kb"
+		}
 	}
 
 	"队友伤害设置"
 	{
-		"开启队友伤害"
+		"友伤设置"
 		{
-			"Type"					"ServerCommand"
-			"MenuTeamFlags"			"14"
-			"VoteTeamFlags"			"14"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启队友伤害?"
-			"Command"				"sm_noff 1"
+			"开启队友伤害"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启队友伤害?"
+				"Command"				"sm_noff 1;exec vote/reflect_ff_off.cfg"
+			}
+			"关闭队友伤害"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭队友伤害?"
+				"Command"				"sm_noff 0;exec vote/reflect_ff_off.cfg"
+			}
 		}
-		"关闭队友伤害"
+		"反伤设置"
 		{
-			"Type"					"ServerCommand"
-			"MenuTeamFlags"			"14"
-			"VoteTeamFlags"			"14"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"关闭队友伤害?"
-			"Command"				"sm_noff 0"
+			"开启反射友伤"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启反射友伤?"
+				"Command"				"sm_noff 1;exec vote/reflect_ff_on.cfg"
+			}
+			"关闭反射友伤"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭反射友伤?"
+				"Command"				"sm_noff 1;exec vote/reflect_ff_off.cfg"
+			}
 		}
 	}
 
