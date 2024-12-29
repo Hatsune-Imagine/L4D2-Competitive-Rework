@@ -249,37 +249,161 @@
 		}
 	}
 
-	"重启当前章节"
+	"游戏设置"
 	{
-		"Type"					"ServerCommand"
-		"MenuTeamFlags"			"14"
-		"VoteTeamFlags"			"14"
-		"AdminOneVotePassed"	"0"
-		"AdminOneVoteAgainst"	"1"
-		"Description"			"重启当前章节?"
-		"Command"				"sm_restart"
-	}
-
-	"人机玩家设置"
-	{
-		"踢出所有电脑"
+		"重启当前章节"
 		{
 			"Type"					"ServerCommand"
 			"MenuTeamFlags"			"14"
 			"VoteTeamFlags"			"14"
 			"AdminOneVotePassed"	"0"
 			"AdminOneVoteAgainst"	"1"
-			"Description"			"踢出所有电脑?"
-			"Command"				"sm_kb"
+			"Description"			"重启当前章节?"
+			"Command"				"sm_restart"
+		}
+
+		"后备弹药设置"
+		{
+			"SelectType"	"Single"
+
+			"开启2倍后备弹药"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启2倍后备弹药?"
+				"Command"				"sm_mammo 2"
+			}
+			"开启3倍后备弹药"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启3倍后备弹药?"
+				"Command"				"sm_mammo 3"
+			}
+			"开启无限后备弹药"
+			{
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启无限后备弹药?"
+				"Command"				"sm_mammo -1"
+			}
+			"关闭更多后备弹药"
+			{
+				"Selected"				"1"
+				"Type"					"ServerCommand"
+				"MenuTeamFlags"			"14"
+				"VoteTeamFlags"			"14"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭更多后备弹药?"
+				"Command"				"sm_mammo 0"
+			}
+		}
+
+		"黑枪提示设置"
+		{
+			"SelectType"	"Single"
+
+			"开启黑枪文字提示"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启黑枪文字提示?"
+				"Command"				"sm_cvar l4d_broadcast_ff 3;sm_cvar l4d_broadcast_hit 1"
+			}
+			"关闭黑枪文字提示"
+			{
+				"Selected"				"1"
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭黑枪文字提示?"
+				"Command"				"sm_cvar l4d_broadcast_ff 0;sm_cvar l4d_broadcast_hit 0"
+			}
+		}
+
+		"血量显示设置"
+		{
+			"SelectType"	"Single"
+
+			"开启特感血量显示"
+			{
+				"Selected"				"1"
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启特感血量显示?"
+				"Command"				"sm_cvar l4d_broadcast_kill 1;sm_cvar l4d_infectedhp 1"
+			}
+			"关闭特感血量显示"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭特感血量显示?"
+				"Command"				"sm_cvar l4d_broadcast_kill 0;sm_cvar l4d_infectedhp 0"
+			}
+		}
+
+		"最大人数设置"
+		{
+			"4人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 4"
+			}
+			"8人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 8"
+			}
+			"12人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 12"
+			}
+			"16人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 16"
+			}
+			"20人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 20"
+			}
+			"24人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 24"
+			}
+			"28人"
+			{
+				"Type"		"ExternalVote"
+				"Command"	"sm_slots 28"
+			}
 		}
 	}
 
-	"队友伤害设置"
+	"友伤设置"
 	{
-		"友伤设置"
+		"友伤"
 		{
+			"SelectType"	"Single"
+
 			"开启队友伤害"
 			{
+				"Selected"				"1"
 				"Type"					"ServerCommand"
 				"MenuTeamFlags"			"14"
 				"VoteTeamFlags"			"14"
@@ -296,11 +420,13 @@
 				"AdminOneVotePassed"	"0"
 				"AdminOneVoteAgainst"	"1"
 				"Description"			"关闭队友伤害?"
-				"Command"				"sm_noff 0;exec vote/reflect_ff_off.cfg"
+				"Command"				"sm_noff 0"
 			}
 		}
-		"反伤设置"
+		"反伤"
 		{
+			"SelectType"	"Single"
+
 			"开启反射友伤"
 			{
 				"Type"					"ServerCommand"
@@ -313,189 +439,87 @@
 			}
 			"关闭反射友伤"
 			{
+				"Selected"				"1"
 				"Type"					"ServerCommand"
 				"MenuTeamFlags"			"14"
 				"VoteTeamFlags"			"14"
 				"AdminOneVotePassed"	"0"
 				"AdminOneVoteAgainst"	"1"
 				"Description"			"关闭反射友伤?"
-				"Command"				"sm_noff 1;exec vote/reflect_ff_off.cfg"
+				"Command"				"exec vote/reflect_ff_off.cfg"
 			}
 		}
 	}
 
-	"后备弹药设置"
+	"人机设置"
 	{
-		"开启2倍后备弹药"
+		"踢出所有电脑"
 		{
 			"Type"					"ServerCommand"
 			"MenuTeamFlags"			"14"
 			"VoteTeamFlags"			"14"
 			"AdminOneVotePassed"	"0"
 			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启2倍后备弹药?"
-			"Command"				"sm_mammo 2"
-		}
-		"开启3倍后备弹药"
-		{
-			"Type"					"ServerCommand"
-			"MenuTeamFlags"			"14"
-			"VoteTeamFlags"			"14"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启3倍后备弹药?"
-			"Command"				"sm_mammo 3"
-		}
-		"开启无限后备弹药"
-		{
-			"Type"					"ServerCommand"
-			"MenuTeamFlags"			"14"
-			"VoteTeamFlags"			"14"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启无限后备弹药?"
-			"Command"				"sm_mammo -1"
-		}
-		"关闭更多后备弹药"
-		{
-			"Type"					"ServerCommand"
-			"MenuTeamFlags"			"14"
-			"VoteTeamFlags"			"14"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"关闭更多后备弹药?"
-			"Command"				"sm_mammo 0"
+			"Description"			"踢出所有电脑?"
+			"Command"				"sm_kb"
 		}
 	}
 
-	"最大人数设置"
+	"特感设置"
 	{
-		"4人"
+		"杀特回血"
 		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 4"
-		}
-		"8人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 8"
-		}
-		"12人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 12"
-		}
-		"16人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 16"
-		}
-		"20人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 20"
-		}
-		"24人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 24"
-		}
-		"28人"
-		{
-			"Type"		"ExternalVote"
-			"Command"	"sm_slots 28"
-		}
-	}
+			"SelectType"	"Single"
 
-	"黑枪提示设置"
-	{
-		"开启黑枪文字提示"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启黑枪文字提示?"
-			"Command"				"sm_cvar l4d_broadcast_ff 3;sm_cvar l4d_broadcast_hit 1"
-		}
-		"关闭黑枪文字提示"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"关闭黑枪文字提示?"
-			"Command"				"sm_cvar l4d_broadcast_ff 0;sm_cvar l4d_broadcast_hit 0"
-		}
-	}
-
-	"血量显示设置"
-	{
-		"开启特感血量显示"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启特感血量显示?"
-			"Command"				"sm_cvar l4d_broadcast_kill 1;sm_cvar l4d_infectedhp 1"
-		}
-		"关闭特感血量显示"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"关闭特感血量显示?"
-			"Command"				"sm_cvar l4d_broadcast_kill 0;sm_cvar l4d_infectedhp 0"
-		}
-	}
-
-	"杀特回血设置"
-	{
-		"开启击杀特感回复 1 血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启击杀特感回复 1 血量?"
-			"Command"				"exec vote/kill_si_restore_health_1.cfg"
-		}
-		"开启击杀特感回复 2 血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启击杀特感回复 2 血量?"
-			"Command"				"exec vote/kill_si_restore_health_2.cfg"
-		}
-		"开启击杀特感回复 3 血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启击杀特感回复 3 血量?"
-			"Command"				"exec vote/kill_si_restore_health_3.cfg"
-		}
-		"开启击杀特感回复 5 血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启击杀特感回复 5 血量?"
-			"Command"				"exec vote/kill_si_restore_health_5.cfg"
-		}
-		"开启击杀特感回复 10 血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"开启击杀特感回复 10 血量?"
-			"Command"				"exec vote/kill_si_restore_health_10.cfg"
-		}
-		"关闭击杀特感回复血量"
-		{
-			"Type"					"ServerCommand"
-			"AdminOneVotePassed"	"0"
-			"AdminOneVoteAgainst"	"1"
-			"Description"			"关闭击杀特感回复血量?"
-			"Command"				"exec vote/kill_si_restore_health_off.cfg"
+			"开启击杀特感回复 1 血量"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启击杀特感回复 1 血量?"
+				"Command"				"exec vote/kill_si_restore_health_1.cfg"
+			}
+			"开启击杀特感回复 2 血量"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启击杀特感回复 2 血量?"
+				"Command"				"exec vote/kill_si_restore_health_2.cfg"
+			}
+			"开启击杀特感回复 3 血量"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启击杀特感回复 3 血量?"
+				"Command"				"exec vote/kill_si_restore_health_3.cfg"
+			}
+			"开启击杀特感回复 5 血量"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启击杀特感回复 5 血量?"
+				"Command"				"exec vote/kill_si_restore_health_5.cfg"
+			}
+			"开启击杀特感回复 10 血量"
+			{
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"开启击杀特感回复 10 血量?"
+				"Command"				"exec vote/kill_si_restore_health_10.cfg"
+			}
+			"关闭击杀特感回复血量"
+			{
+				"Selected"				"1"
+				"Type"					"ServerCommand"
+				"AdminOneVotePassed"	"0"
+				"AdminOneVoteAgainst"	"1"
+				"Description"			"关闭击杀特感回复血量?"
+				"Command"				"exec vote/kill_si_restore_health_off.cfg"
+			}
 		}
 	}
 }
